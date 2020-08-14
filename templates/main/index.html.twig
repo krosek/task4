@@ -1,0 +1,56 @@
+{% extends 'main/base.html.twig' %}
+{% block body %}
+
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-12 col-lg-10 col-md-8">
+                <h1 class="display-4 text-left">
+                    {{ title }}
+                </h1>
+            </div>
+            <div class="col-12 col-lg-2 col-md-4 ">
+                <div class="text-right">
+                    <a  href ="{{ path('app_logout') }} " class="btn btn-block btn-primary mt-4">Log out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row no-gutters justify-content-left mt-5">
+            <div class="col-4 col-lg-4 col-md-4">
+                <button type="submit" form="check" formaction="{{path('blocked')}}" class="btn btn-link" value="block">
+                    <i class="fas fa-lock"></i>
+                </button>
+                <button type="submit" form="check" formaction="{{path('unblocked')}}" class="btn btn-link" value="unblock">
+                    <i class="fas fa-lock-open"></i>
+                </button>
+                <button type="submit" form="check" formaction="{{path('delete')}}" class="btn btn-link" value="delete">
+                    <i class="far fa-trash-alt"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-12 text-center mt-3">
+                <div id="app">
+                    <table class="table table-hover" >
+                        <form id="check" method="post" >
+                            <tr><th><label><input id="checkAll" type="checkbox"></label></th>
+                                <th>userId</th><th>name</th><th>email</th>
+                                <th>registration date</th><th>last login date</th><th>status</th></tr>
+                                {% for user in users %}
+                                <tr><td><label><input value="{{ user.id }}" name="{{ user.id }}" type="checkbox"></label></td>
+                                    <td>{{ user.id }}</td><td>{{ user.name }}</td>
+                                    <td>{{ user.email }}</td><td>{{ user.registerdate|date('Y-m-d H:i:s') }}</td>
+                                    <td>{{ user.lastlogin|date('Y-m-d H:i:s') }}</td><td>{{ user.status }}</td></tr>
+                                {% endfor %}
+                        </form>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
